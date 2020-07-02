@@ -11,3 +11,9 @@ class UserInfoSerializer(serializers.ModelSerializer):
         #     'profile', 'first_will', 'second_will', 'department'
         # ]
         depth = 1
+
+
+class DepartmentInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Department
+        fields = '__all__'

@@ -15,7 +15,7 @@ class User(models.Model):
     qq = models.CharField(max_length=10)
     class_belong = models.CharField(max_length=32, default='')
     gender = models.IntegerField(choices=GENDER, default=1)
-    profile = models.TextField(default='1')
+    profile = models.TextField(default='')
     first_will = models.IntegerField(choices=WILL, default=1, null=False, blank=False)
     second_will = models.IntegerField(choices=WILL, default=1, null=False, blank=False)
     department = models.ForeignKey('Department', on_delete=models.CASCADE, null=True, blank=True)
@@ -26,8 +26,8 @@ class User(models.Model):
 
 class Department(models.Model):
     name = models.CharField(max_length=8, default='', primary_key=True)
-
     profile = models.TextField()
+    bgImage = models.CharField(max_length=256, default='')
 
     def __str__(self):
         return self.name
