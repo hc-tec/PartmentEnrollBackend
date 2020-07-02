@@ -7,6 +7,10 @@ from . import models
 
 from django.http import JsonResponse
 
-class UserRegister(generics.CreateAPIView):
-    queryset = models.User
+class UserInfo(generics.ListCreateAPIView):
+    queryset = models.User.objects.all()
     serializer_class = serializer.UserInfoSerializer
+
+
+
+

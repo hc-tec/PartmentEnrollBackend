@@ -8,22 +8,28 @@ class User(models.Model):
     WILL = (
         (1, '研发部'),
         (2, 'acm 部'),
-        (3, '行政部'),
-        (4, 'ctf 部')
+        (3, 'ctf 部')
     )
-    USER_TYPE = (
-        (1, 'student'),
-        (2, 'charger'),
-        (3, 'admin'),
-    )
-    user_name = models.CharField(max_length=16)
-    student_id = models.CharField(max_length=10)
-    avatar = models.CharField(max_length=128, null=True, blank=True)
-    type = models.IntegerField(choices=USER_TYPE, default=1)
+    user_name = models.CharField(max_length=16, unique=True, null=False, blank=False)
+    student_id = models.CharField(max_length=10, unique=True, null=False, blank=False)
     qq = models.CharField(max_length=10)
+    class_belong = models.CharField(max_length=32, default='')
     gender = models.IntegerField(choices=GENDER, default=1)
-    first_will = models.IntegerField(choices=WILL, null=True, blank=True)
-    second_will = models.IntegerField(choices=WILL, null=True, blank=True)
+    profile = models.TextField(default='1')
+    first_will = models.IntegerField(choices=WILL, default=1, null=False, blank=False)
+    second_will = models.IntegerField(choices=WILL, default=1, null=False, blank=False)
+    department = models.ForeignKey('Department', on_delete=models.CASCADE, null=True, blank=True)
+
 
     def __str__(self):
         return self.user_name
+
+class Department(models.Model):
+    name = models.CharField(max_length=8, default='', primary_key=True)
+
+    profile = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
